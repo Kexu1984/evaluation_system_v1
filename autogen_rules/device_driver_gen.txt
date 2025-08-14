@@ -1,0 +1,43 @@
+生成的驱动要求如下：
+
+1. 生成的c语言驱动需要放在${device_name}/output/c_driver/目录下
+1.1）在${device_name}/output/c_driver/目录下创建一个hal目录
+1.2）在${device_name}/output/c_driver/目录下创建一个driver目录
+2. hal目录用于存放寄存器操作逻辑；driver目录用于存放业务逻辑
+3. 创建一个<device>_hal.h；
+3.1）该头文件需要引出所有寄存器的读写接口
+3.2）该头文件需要以结构体的方式定义全局寄存器，例如：
+'''
+struct DMARegister {
+    uint32_t DMA_CTRL;
+    uint32_t DMA_CHAN_CTRL;
+    ...
+}
+'''
+3.3）读写寄存器的接口中需要用到write reg和read reg的写地址操作，需要做出如下定义：
+'''
+#ifdef REAL_CHIP
+/* read / write memory directly */
+#define WRITE_REGISTER(addr, value)  *(volatile uint32_t *)(addr) = (value)
+#define READ_REGISTER(addr)          *(volatile uint32_t *)(addr)
+#else
+/* read / write memory by libdrvintf.a which could help you to communicate with python model */
+#include <interface_layer.h>
+int write_register(uint32_t address, uint32_t data, uint32_t size);
+int read_register(uint32_t address, uint32_t size);
+#define WRITE_REGISTER(addr, value)  (void)write_register(addr, value, 4)
+#define READ_REGISTER(addr, value)   read_register(addr, 4)
+#endif
+'''
+这样<device>_hal.c中就可以用一套WRITE_REGISTER/READ_REGISTER去操作寄存器，用户可以通过READ_CHIP宏定义去决定镜像生成模式；
+注意：当编译时，如果没有定义REAL_CHIP，则需要添加路径lib_drvintf中的libdrvintf.a作为依赖，read_register和write_register与模型的通信实现包含在此静态库中；
+并且，默认情况下，不定义REAL_CHIP；
+
+3.4）hal层代码需要提供一个base_address_init的接口，用于注册寄存器的base address，交由外部传入；传入后，所有的读写寄存器访问都应该是：
+WRITE_REGISTER(base + offset, value)/READ_REGISTER(base + offset)的方式
+
+4. driver目录下需创建两个文件：<device>_driver.c和<device>_driver.h
+
+4.1）<device>_driver.c内部通过调用<device>_hal.c中的接口再结合${device_name}/input/目录下文件的描述生成模块的驱动
+4.2）<device>_driver.c不需要考虑注册中断处理函数，该逻辑会包含在测试程序中；
+4.3）<device>_driver.c需要至少一个init和deinit函数用于init device和deinit device

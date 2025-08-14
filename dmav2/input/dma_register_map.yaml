@@ -1,0 +1,5808 @@
+registers:
+- name: DMA_TOP_RST
+  address: '0x000'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: DMA_IDLE
+    access: RO
+    description: "DMA idle\nIndicate DMA in idle or busy status.\n0: One or more DMA\
+      \ channels are \n1: All DMA channels in idle status"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_STATUS_00
+  address: '0x040'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_01
+  address: '0x080'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_02
+  address: '0x0C0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_03
+  address: '0x100'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_04
+  address: '0x140'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_05
+  address: '0x180'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_06
+  address: '0x1C0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_07
+  address: '0x200'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_08
+  address: '0x240'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_09
+  address: '0x280'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_10
+  address: '0x2C0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_11
+  address: '0x300'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_12
+  address: '0x340'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_13
+  address: '0x380'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_14
+  address: '0x3C0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_STATUS_15
+  address: '0x400'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '8'
+    name: CLE
+    access: RO
+    description: 'Channel Length Error
+
+      0: No channel length error
+
+      1: The last recorded error was a configuration error detected in the CHAN_LENGTH
+      field.
+
+      CHAN_LENGTH is inconsistent with SSIZE or DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '7'
+    name: SAE
+    access: RO
+    description: 'Source Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the SADDR field.
+
+      SADDR is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '6'
+    name: DAE
+    access: RO
+    description: 'Destination Address Error
+
+      0: No destination address configuration error
+
+      1: The last recorded error was a configuration error detected in the DADDR field.
+
+      DADDR is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '5'
+    name: SOE
+    access: RO
+    description: 'Source Offset Error
+
+      0: No destination offset configuration error
+
+      1: The last recorded error was a configuration error detected in the SOFF field.
+
+      SOFF is inconsistent with SSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '4'
+    name: DOE
+    access: RO
+    description: 'Destination Offset Error
+
+      0:  No destination offset configuration error
+
+      1:  The last recorded error was a configuration error detected in the DOFF field.
+
+      DOFF is inconsistent with DSIZE.
+
+      write "0"to this bit, clear status'
+  - bit_range: '3'
+    name: SBE
+    access: RO
+    description: 'Source Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a source read'
+  - bit_range: '2'
+    name: DBE
+    access: RO
+    description: 'Destination Bus Error
+
+      Indicate when channel n reading or writing, whether or not  error flag occurred
+      .write "0"to this bit, clear status
+
+      0:  No destination bus error
+
+      1: The last recorded error was a bus error on a destination write'
+  - bit_range: '1'
+    name: HALF_FINISH
+    access: RO
+    description: 'Half Finish Flag
+
+      Indicate when channel n reading or writing, whether or not half Number of Data
+      transferred. write "0"to this bit, clear status
+
+      0: Half of data not finished
+
+      1: Half of data finished'
+  - bit_range: '0'
+    name: FINISH
+    access: RO
+    description: 'Finish Flag
+
+      Indicate when channel n reading or writing, whether or not DMA channel finished
+      data transfer. write "0"to this bit, clear status
+
+      0: Data transfer not finished
+
+      1: Data transfer finished'
+- name: CHANNELx_INTEN_00
+  address: '0x044'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_01
+  address: '0x084'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_02
+  address: '0x0C4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_03
+  address: '0x104'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_04
+  address: '0x144'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_05
+  address: '0x184'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_06
+  address: '0x1C4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_07
+  address: '0x204'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_08
+  address: '0x244'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_09
+  address: '0x284'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_10
+  address: '0x2C4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_11
+  address: '0x304'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_12
+  address: '0x344'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_13
+  address: '0x384'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_14
+  address: '0x3C4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_INTEN_15
+  address: '0x404'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: TEIE
+    access: RW
+    description: 'TRANS_ERROR interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled. All error status described in CHANNELx_STATUS can trigger
+      interrupt.'
+  - bit_range: '1'
+    name: HFIE
+    access: RW
+    description: 'HALF_FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+  - bit_range: '0'
+    name: FIE
+    access: RW
+    description: 'FINISH interrupt enable
+
+      This bit is set and cleared by software.
+
+      0: interrupt disabled
+
+      1: interrupt enabled'
+- name: CHANNELx_RST_00
+  address: '0x048'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_01
+  address: '0x088'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_02
+  address: '0x0C8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_03
+  address: '0x108'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_04
+  address: '0x148'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_05
+  address: '0x188'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_06
+  address: '0x1C8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_07
+  address: '0x208'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_08
+  address: '0x248'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_09
+  address: '0x288'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_10
+  address: '0x2C8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_11
+  address: '0x308'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_12
+  address: '0x348'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_13
+  address: '0x388'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_14
+  address: '0x3C8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_RST_15
+  address: '0x408'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '2'
+    name: FLUSH
+    access: RW
+    description: "DMA channel  flush\nSetting FLUSH = 1 will stop DMA and allow DMA\
+      \ to flush its internal buffer residual data to the memory. After the flush\
+      \ is finished, DMA will set channel enable to 0 and stop DMA. \nSW sets FLUSH\
+      \ = 1 and waits for HW to be clear to 0.\n0: Disable\n1: Enable"
+  - bit_range: '1'
+    name: HARD_RST
+    access: RW
+    description: 'General DMA hard reset (reset regardless of the current transaction)
+
+      SW sets ''hard_rst'' to 1 then sets ''hard_rst'' back to 0, and the reset mechanism
+      is finished.
+
+      0: Disable
+
+      1: Enable'
+  - bit_range: '0'
+    name: WARM_RST
+    access: RW
+    description: 'General DMA warm reset (reset after the current transaction)
+
+      SW sets ''warm_rst'' to 1 and HW clears ''warm_rst'' back to 0, and the reset
+      mechanism is finished.
+
+      0: Disable
+
+      1: Enable'
+- name: CHANNELx_STOP_00
+  address: '0x04C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_01
+  address: '0x08C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_02
+  address: '0x0CC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_03
+  address: '0x10C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_04
+  address: '0x14C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_05
+  address: '0x18C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_06
+  address: '0x1CC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_07
+  address: '0x20C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_08
+  address: '0x24C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_09
+  address: '0x28C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_10
+  address: '0x2CC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_11
+  address: '0x30C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_12
+  address: '0x34C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_13
+  address: '0x38C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_14
+  address: '0x3CC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_STOP_15
+  address: '0x40C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '0'
+    name: STOP
+    access: RW
+    description: 'DMA channel stop(stop after the current transaction)
+
+      SW sets '' STOP '' to 1 then after current transaction, transfer paused, SW
+      sets '' STOP '' to 0 then resume data transfer.
+
+      0: Not stop channel transfer
+
+      1: STOP channel transfer'
+- name: CHANNELx_CONFIG_00
+  address: '0x050'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_01
+  address: '0x090'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_02
+  address: '0x0D0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_03
+  address: '0x110'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_04
+  address: '0x150'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_05
+  address: '0x190'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_06
+  address: '0x1D0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_07
+  address: '0x210'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_08
+  address: '0x250'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_09
+  address: '0x290'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_10
+  address: '0x2D0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_11
+  address: '0x310'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_12
+  address: '0x350'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_13
+  address: '0x390'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_14
+  address: '0x3D0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CONFIG_15
+  address: '0x410'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: CHAN_DIR
+    access: RW
+    description: '0:Read from peripheral,and write to memory.
+
+      1:Read from memory,and write to peripheral.'
+  - bit_range: '6'
+    name: CHAN_CIRCULAR
+    access: RW
+    description: '0: Circular mode disable
+
+      1: Circular mode enable'
+  - bit_range: '5:4'
+    name: DSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '3:2'
+    name: SSIZE
+    access: RW
+    description: '00: 8bit
+
+      01:16bit
+
+      10:32bit
+
+      11: reserve'
+  - bit_range: '1:0'
+    name: CHAN_PRIORITY
+    access: RW
+    description: '00: low
+
+      01:middle
+
+      10:high
+
+      11: very high'
+- name: CHANNELx_CHAN_LENGTH_00
+  address: '0x054'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_01
+  address: '0x094'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_02
+  address: '0x0D4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_03
+  address: '0x114'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_04
+  address: '0x154'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_05
+  address: '0x194'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_06
+  address: '0x1D4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_07
+  address: '0x214'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_08
+  address: '0x254'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_09
+  address: '0x294'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_10
+  address: '0x2D4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_11
+  address: '0x314'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_12
+  address: '0x354'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_13
+  address: '0x394'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_14
+  address: '0x3D4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_CHAN_LENGTH_15
+  address: '0x414'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: CHAN_LENGTH
+    access: RW
+    description: '0~32767 byte
+
+      [15]bit should be 0'
+- name: CHANNELx_SSTART_ADDR_00
+  address: '0x058'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_01
+  address: '0x098'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_02
+  address: '0x0D8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_03
+  address: '0x118'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_04
+  address: '0x158'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_05
+  address: '0x198'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_06
+  address: '0x1D8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_07
+  address: '0x218'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_08
+  address: '0x258'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_09
+  address: '0x298'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_10
+  address: '0x2D8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_11
+  address: '0x318'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_12
+  address: '0x358'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_13
+  address: '0x398'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_14
+  address: '0x3D8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SSTART_ADDR_15
+  address: '0x418'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SSTART_ADDR
+    access: RW
+    description: 'When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR '
+- name: CHANNELx_SEND_ADDR_00
+  address: '0x05C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_01
+  address: '0x09C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_02
+  address: '0x0DC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_03
+  address: '0x11C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_04
+  address: '0x15C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_05
+  address: '0x19C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_06
+  address: '0x1DC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_07
+  address: '0x21C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_08
+  address: '0x25C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_09
+  address: '0x29C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_10
+  address: '0x2DC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_11
+  address: '0x31C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_12
+  address: '0x35C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_13
+  address: '0x39C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_14
+  address: '0x3DC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_SEND_ADDR_15
+  address: '0x41C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: SEND_ADDR
+    access: RW
+    description: When HW read or write source address equal  SEND_ADDR - SOFFSET,then
+      next address round to SSTART_ADDR
+- name: CHANNELx_DSTART_ADDR_00
+  address: '0x060'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_01
+  address: '0x0A0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_02
+  address: '0x0E0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_03
+  address: '0x120'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_04
+  address: '0x160'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_05
+  address: '0x1A0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_06
+  address: '0x1E0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_07
+  address: '0x220'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_08
+  address: '0x260'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_09
+  address: '0x2A0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_10
+  address: '0x2E0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_11
+  address: '0x320'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_12
+  address: '0x360'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_13
+  address: '0x3A0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_14
+  address: '0x3E0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_DSTART_ADDR_15
+  address: '0x420'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DSTART_ADDR
+    access: RW
+    description: 'When HW read or write Destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR '
+- name: CHANNELx_CHAN_ENABLE_00
+  address: '0x064'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_01
+  address: '0x0A4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_02
+  address: '0x0E4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_03
+  address: '0x124'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_04
+  address: '0x164'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_05
+  address: '0x1A4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_06
+  address: '0x1E4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_07
+  address: '0x224'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_08
+  address: '0x264'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_09
+  address: '0x2A4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_10
+  address: '0x2E4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_11
+  address: '0x324'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_12
+  address: '0x364'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_13
+  address: '0x3A4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_14
+  address: '0x3E4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_CHAN_ENABLE_15
+  address: '0x424'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '1'
+    name: EDBG
+    access: RW
+    description: 'Enable debug
+
+      0: When in debug mode, the DMA continues to operate.
+
+      1: When in debug mode, when cpu is halted,DMA will be disabled.'
+  - bit_range: '0'
+    name: CHAN_EN
+    access: RW
+    description: 'Channel enable
+
+      In non channel circular mode, SW set CHAN_EN to 1,and when transfer finish,
+      HW clear CHAN_EN to 0;
+
+      In channel circular mode ,SW set CHAN_EN to 1, when transfer finish, HW restart
+      new transfer with the same configuration;
+
+      0: disable channel
+
+      1: enable channel'
+- name: CHANNELx_DATA_TRANS_NUM_00
+  address: '0x068'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_01
+  address: '0x0A8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_02
+  address: '0x0E8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_03
+  address: '0x128'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_04
+  address: '0x168'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_05
+  address: '0x1A8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_06
+  address: '0x1E8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_07
+  address: '0x228'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_08
+  address: '0x268'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_09
+  address: '0x2A8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_10
+  address: '0x2E8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_11
+  address: '0x328'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_12
+  address: '0x368'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_13
+  address: '0x3A8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_14
+  address: '0x3E8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_DATA_TRANS_NUM_15
+  address: '0x428'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '15:0'
+    name: DATA_TRANS_NUM
+    access: RO
+    description: Indicated how many data have been transferred
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_00
+  address: '0x06C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_01
+  address: '0x0AC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_02
+  address: '0x0EC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_03
+  address: '0x12C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_04
+  address: '0x16C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_05
+  address: '0x1AC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_06
+  address: '0x1EC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_07
+  address: '0x22C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_08
+  address: '0x26C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_09
+  address: '0x2AC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_10
+  address: '0x2EC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_11
+  address: '0x32C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_12
+  address: '0x36C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_13
+  address: '0x3AC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_14
+  address: '0x3EC'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_INTER_FIFO_DATA_LEFT_NUM_15
+  address: '0x42C'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '5:0'
+    name: INTER_FIFO_DATA_LEFT_NUM
+    access: RO
+    description: Indicated how many byte data left in inter fifo.usually used it together
+      with FLUSH. When Time out, and  INTER_FIFO_DATA_LEFT_NUM not equal to 0,then
+      SW can start flush process
+- name: CHANNELx_DEND_ADDR_00
+  address: '0x070'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_01
+  address: '0x0B0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_02
+  address: '0x0F0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_03
+  address: '0x130'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_04
+  address: '0x170'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_05
+  address: '0x1B0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_06
+  address: '0x1F0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_07
+  address: '0x230'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_08
+  address: '0x270'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_09
+  address: '0x2B0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_10
+  address: '0x2F0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_11
+  address: '0x330'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_12
+  address: '0x370'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_13
+  address: '0x3B0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_14
+  address: '0x3F0'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_DEND_ADDR_15
+  address: '0x430'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:0'
+    name: DEND_ADDR
+    access: RW
+    description: When HW read or write destination address equal  DEND_ADDR - DOFFSET,then
+      next address round to DSTART_ADDR
+- name: CHANNELx_ADDR_OFFSET_00
+  address: '0x074'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_01
+  address: '0x0B4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_02
+  address: '0x0F4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_03
+  address: '0x134'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_04
+  address: '0x174'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_05
+  address: '0x1B4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_06
+  address: '0x1F4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_07
+  address: '0x234'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_08
+  address: '0x274'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_09
+  address: '0x2B4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_10
+  address: '0x2F4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_11
+  address: '0x334'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_12
+  address: '0x374'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_13
+  address: '0x3B4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_14
+  address: '0x3F4'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_ADDR_OFFSET_15
+  address: '0x434'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '31:16'
+    name: DOFFSET
+    access: RW
+    description: Offset applied to the current destination address to form the next-state
+      value as each destination write is completed.
+  - bit_range: '15:0'
+    name: SOFFSET
+    access: RW
+    description: Offset applied to the current source address to form the next-state
+      value as each source read is completed.
+- name: CHANNELx_DMAMUX_CFG_00
+  address: '0x078'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_01
+  address: '0x0B8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_02
+  address: '0x0F8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_03
+  address: '0x138'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_04
+  address: '0x178'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_05
+  address: '0x1B8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_06
+  address: '0x1F8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_07
+  address: '0x238'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_08
+  address: '0x278'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_09
+  address: '0x2B8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_10
+  address: '0x2F8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_11
+  address: '0x338'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_12
+  address: '0x378'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_13
+  address: '0x3B8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_14
+  address: '0x3F8'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'
+- name: CHANNELx_DMAMUX_CFG_15
+  address: '0x438'
+  default: '0x0000_0000'
+  fields:
+  - bit_range: '7'
+    name: TRIG_EN
+    access: RW
+    description: "DMAMUX CHANNEL TRIG ENABLE\n  Enables the periodic trigger capability\
+      \ for the triggered DMA channel.\n  0: Triggering is disabled. If triggering\
+      \ is disabled and ENBL is set, the DMA Channel will simply route the specified\
+      \ source to the DMA channel. (Normal mode)\n  1: Triggering is enabled. If triggering\
+      \ is enabled and ENBL is set, the DMAMUX is in Periodic Trigger mode."
+  - bit_range: '6:0'
+    name: REQ_ID
+    access: RW
+    description: 'REQ_ID
+
+      Select which peripheral request to this channel.The REQ_ID and peripheral mapping
+      refer to 1.4.1 DMA request mapping.'

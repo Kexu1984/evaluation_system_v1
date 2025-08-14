@@ -1,0 +1,38 @@
+我已经提供了一个设备模型的基本工作框架，你可以参考:crc/output/crc_device.py；
+
+生成的设备模型帮我放在input对应的output目录下，同时也在其中生成一份测试程序。
+
+下述是模型模板的基本描述，请详细参考说明并满足其要求.
+
+关于device model，我有如下需求：
+1. 此处应该有一个公共类：base class，任何具体device模型都应该继承这个base class
+1.1）base class应该包含如下基础函数：init，read，write，register_irq_callback；
+1.2）read和write通常对应设备寄存器的读写操作，也就是最终会调用到下面2.1中所说的register manager的read_callback和write_callback
+1.3）如果对应设备是内存模型，那么read和write就对应内存的读写操作，此时就不需要read_callback和write_callback
+1.4）init通常做如下操作：寄存器的添加，状态设置等；
+1.5）register_irq_callback函数的作用：外部如果实现了发送中断的功能，就可以通过register_irq_callback将其中的send irq的函数传递给此设备；
+2. 此处应该有一个公共类：register manager class，任何具体device模型都应该包含此类用于描述设备的所有寄存器
+2.1） register manager class中应该包括一个函数：“add register”，用于添加一个寄存器，函数原型如下：
+===================
+    def define_register(self, offset: int, name: str, register_type: RegisterType = RegisterType.READ_WRITE,
+                       reset_value: int = 0, mask: int = 0xFFFFFFFF,
+                       read_callback: Optional[Callable[[self, int, int], int]] = None,
+                       write_callback: Optional[Callable[[self, int, int], None]] = None) -> None
+offset: register的偏移地址
+read_callback: 如果有些寄存器的读取行为会触发一些额外的操作，那么对应的寄存器就需要注册此read_callback，例如：有些状态寄存器具有“读清零”的功能，那么当外部准备读此寄存器时，read_callback里应该就把对应的状态位清零；
+write_callback：如果有些寄存器的写行为会触发一些额外的操作，那么对应的寄存器就需要注册此write_callback，例如：一些控制寄存器的使能位如果在写操作时被设置了，那么就相当于触发此设备开始工作，此时write_callback中就应该加上设备工作的具体流程
+read_callback和write_callback应该能够拿到当前设备的所有寄存器，因为有些寄存器的读写会影响其他寄存器的值
+===================
+3. device_model应该能够被多次实例化以表示多个相同的设备，例如：一个Soc中可能存在多个uart单元
+4. device_model如果具备触发中断的能力，那么应该在对应设备的某个job完成之后通过send irq的callback去对外发送中断；
+5. device_model如果具备访问DMA的能力，那么也应该支持dma interface这个类，用于主动操作dma设备；
+6. 内存的读写可以支持非4字节的宽度，所以内存的read和write应该额外加上一个参数：width;所以，其他device的read/write的width参数默认是4bytes
+7. 对于能够连接外设的device（例如：uart，spi，can等）来说，还需要集成一个IO Interface类，该类具备如下说明：
+7.1）支持Input和Output功能用于支持设备的数据输入和输出功能：已知c driver代码只能操作寄存器实现设备的Output功能，例如：驱动往uart的TX寄存器写数据后，uart就可以发送数据到外部；
+7.2）对于Input而言，device需要具备connect接口，用于表示“存在外设连接上本设备”，如果是要求当前device output功能的connect，就要求外部设备创建thread等待output的数据，如果是要求当前device input功能的connect，此时就需要device去创建一个thread用于实时的获取外部设备随时可能发送来的数据；
+7.3）无论输入还是输出都是至少两个参数：data和width，分别表示输入输出的数据和宽度；
+8. 对于具备错误状态寄存器的模块，设备模型还需要对外提供一个error injection功能，用于模拟故障注入功能；
+
+### 注意
+其他目录不能被修改，所有的修改只能输出到output目录下。
+device也需要集成对应框架下的trace class和对应的接口
