@@ -30,7 +30,8 @@ The code must implement all functions defined in the application note and correc
 
 Key aspects:
 - Complete implementation of all required features
-- Correct register-level interactions
+- Correct register-level interactions, all registers operation are implemented
+- Correct interrupt logic and status
 - Compliance with hardware specifications
 - Proper error handling and edge cases
 
